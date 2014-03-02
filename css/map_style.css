@@ -1,0 +1,23 @@
+.inner-boundary {
+  fill: none;
+  stroke: gray;
+/*  stroke-dasharray: 2,2;*/
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.outer-boundary {
+  fill: none;
+  stroke-width: 4;
+  stroke: #777;
+  stroke-linejoin: round;
+}
+
+.count-label {
+  fill: red;
+/*  fill-opacity: .5;*/
+  font-size: 15px;
+  font-weight: 500;
+  text-anchor: middle;
+  font-family: sans-serif;
+}

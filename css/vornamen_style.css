@@ -1,0 +1,80 @@
+.url_field, .json_input {
+  width: 400px;
+}
+
+#input_checkboxes {
+  display: none;
+}
+
+.text-error, .text-success {
+  font-weight: bold;
+}
+
+.error_desc {
+  margin-left: 20px;
+}
+
+.error_msg {
+/*  font-style: italic;
+  font-weight: bold;
+*/}
+
+.error_path {
+  font-family: "Courier", sans-serif;
+}
+
+.legal {
+  margin-top: 20px;
+}
+
+
+/* Header
+-------------------------------------------------- */
+
+.header {
+  text-align: center;
+  padding: 30px 0;
+  margin-bottom: 50px;
+  border-bottom: 1px solid #e5e5e5;
+  background-color: #f5f5f5;
+}
+
+.header #logo {
+  float: left;
+}
+
+.header #sitename {
+/*  float: left;*/
+  text-align: left;
+  font-size: 60px;
+  line-height: 90px;
+  margin-left: 120px;
+  text-rendering: optimizelegibility;
+  font-weight: 200;
+}
+
+/* Footer
+-------------------------------------------------- */
+
+.footer {
+  text-align: center;
+  padding: 30px 0;
+  margin-top: 50px;
+  border-top: 1px solid #e5e5e5;
+  background-color: #f5f5f5;
+}
+.footer p {
+  margin-bottom: 0;
+  color: #777;
+}
+.footer-links {
+  margin: 10px 0;
+}
+.footer-links li {
+  display: inline;
+  padding: 0 2px;
+}
+.footer-links li:first-child {
+  padding-left: 0;
+}
+
