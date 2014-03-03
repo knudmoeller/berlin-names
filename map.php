@@ -45,7 +45,11 @@ while( $row = sparql_fetch_array( $result ) )
 {
   $php_data[] = $row;
 }
- 
+
+$names = array();
+foreach (file("data/names.txt") as $name) {
+  $names[] = array("name" => $name);
+}
 ?>
 
 <div class="col-md-8" id="map-cell"></div>
@@ -53,21 +57,8 @@ while( $row = sparql_fetch_array( $result ) )
   
   <form role="form" enctype="multipart/form-data" action="map.php" method="GET">
     <div class="form-group">
-      <label for="name_selector">Name</label>
-      <select id="name_selector" name="name" class="form-control">
-        <?php
-          $names = file("data/names.txt");
-          foreach($names as $name)
-          {
-            $name = trim($name);
-            if ($name_param === $name) {
-              echo "<option selected='selected'>" . $name . "</option>";
-            } else {
-              echo "<option>" . $name . "</option>";              
-            }
-          }
-        ?>
-      </select>
+      <label for="name_input">Name</label>
+      <input id="name_input" name="name" type="text" class="form-control" placeholder="Name" value="<?php echo $name_param; ?>"/>
     </div>
     <div class="form-group">
       <label for="year_selector">Jahr</label>
@@ -224,6 +215,32 @@ while( $row = sparql_fetch_array( $result ) )
 
 		});
   
+    // populate name typeahead text field
+    var all_names = <?php echo json_encode($names); ?>;
+    // var all_names = [
+    //   { "name": "Barbara" },
+    //   { "name": "Berit" },
+    //   { "name": "Fritz" },
+    //   { "name": "Franz" },
+    //   { "name": "Ilse" },
+    //   { "name": "Inke" },
+    //   { "name": "Knud" },
+    //   { "name": "Konrad" }
+    // ];
+    
+    var name_suggest = new Bloodhound({
+      datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.name); },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      local: all_names
+    });
+    
+    name_suggest.initialize();
+  
+    $('#name_input').typeahead(null, {
+      displayKey: 'name',
+      source: name_suggest.ttAdapter()
+    });
+    
 </script>
 
 

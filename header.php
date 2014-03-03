@@ -12,6 +12,8 @@
   <link rel="stylesheet" type="text/css" href="css/map_style.css" />	
 	<script type="text/javascript" src="lib/d3/d3.v3.js"></script>
 	<script type="text/javascript" src="lib/js/topojson.v1.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="lib/js/typeahead.bundle.js"></script>
 </head>
 
 <body class="index home no-sidebar">
