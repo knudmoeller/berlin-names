@@ -1,0 +1,9 @@
+PREFIX qb: <http://purl.org/linked-data/cube#> 
+PREFIX namevoc: <http://data.datalysator.com/vocab/>
+
+SELECT DISTINCT (MAX(?count) as ?max_count)
+WHERE {
+  ?obs a qb:Observation ;
+    namevoc:count_measure ?count ;
+  .
+}

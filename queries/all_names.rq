@@ -1,0 +1,15 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX qb: <http://purl.org/linked-data/cube#> 
+PREFIX namevoc: <http://data.datalysator.com/vocab/> 
+
+SELECT DISTINCT ?name_string
+WHERE {
+  ?obs a qb:Observation ;
+    namevoc:name_dim ?name ;
+  .
+  
+  ?name rdfs:label ?name_string ;
+  .
+  
+}
+ORDER BY ?name_string

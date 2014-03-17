@@ -1,0 +1,28 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX qb: <http://purl.org/linked-data/cube#> 
+PREFIX sdmx-code: <http://purl.org/linked-data/sdmx/2009/code#> 
+PREFIX sdmx-dimension: <http://purl.org/linked-data/sdmx/2009/dimension#> 
+PREFIX namevoc: <http://data.datalysator.com/vocab/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+
+SELECT DISTINCT ?year ?district_name ?count
+WHERE {
+  BIND("{{sex}}" AS ?sex_code)
+  ?obs a qb:Observation ;
+    sdmx-dimension:refTime ?year ;
+    namevoc:name_dim ?name ;
+    namevoc:district_dim ?district ;
+    namevoc:count_measure ?count ;
+  .
+  
+  ?name rdfs:label  ?name_string ;
+    namevoc:sex ?sex ;
+  .
+  
+  ?district rdfs:label ?district_name .
+  
+  ?sex skos:notation ?sex_code .
+
+  FILTER(REGEX(?name_string, "^{{name}}$", "i"))
+}
+ORDER BY ?year desc(?count)

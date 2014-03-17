@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !(/$|\.) 
+RewriteRule (.*) %{REQUEST_URI}/ [R=301,L]
+RewriteRule ^$ index.php [QSA,NC,L]
+RewriteRule name/(.*)$ api/name_process.php?request=$1 [QSA,NC,L]
+RewriteCond %{QUERY_STRING} ^name=(\S+)$
+RewriteRule api/name_process.php name/%1?
+</IfModule>

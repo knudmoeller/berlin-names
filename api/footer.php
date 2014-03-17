@@ -1,6 +1,7 @@
-        </div>
-      </div>
-    </div>
+<?php
+  require_once("def.inc");
+?>
+
     <footer class="footer">
       <div class="container">
         <p>
@@ -16,11 +17,6 @@
         </div>
       </div>
     </footer>
-  </div>
-
-	</div>
-  <script src="http://code.jquery.com/jquery.js"></script>
-  <!--<script src="/wp-includes/js/jquery/jquery.js"></script>-->
-  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?php echo APP_PATH; ?>lib/bootstrap/js/bootstrap.min.js"></script>
   </body>
 </html>
