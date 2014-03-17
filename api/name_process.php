@@ -58,7 +58,7 @@ function name_list($page, $max_pages) {
 
 function name_data($name) {
   
-  $slices = [];
+  $slices = Array();
   $result_json = Array(
     "@id" => "http://$_SERVER[HTTP_HOST]". APP_PATH . "name/$name/",
   );
