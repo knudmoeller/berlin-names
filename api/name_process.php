@@ -2,6 +2,19 @@
 
 include("def.inc");
 
+function run_query($query) {
+  $cache_path = "../cache/" . sha1($query);
+  if (file_exists($cache_path)) {
+    $result = unserialize(file_get_contents($cache_path));
+    return $result;
+  } else {
+    $result = sparql_query($query);
+    file_put_contents($cache_path, serialize($result));
+    return $result;
+  }
+}
+
+
 function sum_counts($year) {
   $total = 0;
   foreach($year as $district_count) {
@@ -12,7 +25,7 @@ function sum_counts($year) {
 
 function count_names() {
   $query = file_get_contents("../queries/count_names.rq");
-  $result = sparql_query($query);
+  $result = run_query($query);
   $row = sparql_fetch_array( $result );
   return $row["name_count"];
 }
@@ -46,7 +59,7 @@ function name_list($page, $max_pages) {
   $offset = ($page - 1) * LIST_LIMIT + 1;
   $query = str_replace("{{offset}}", $offset, $query);
   $query = str_replace("{{limit}}", LIST_LIMIT, $query);
-  $result = sparql_query($query);
+  $result = run_query($query);
   $name_list = Array();
   while( $row = sparql_fetch_array( $result ) )
   {
@@ -59,7 +72,7 @@ function name_list($page, $max_pages) {
 function name_data($name) {
   
   $slices = Array();
-  $result_json = Array(
+  $result_array = Array(
     "@id" => "http://$_SERVER[HTTP_HOST]". APP_PATH . "name/$name/",
   );
   
@@ -72,19 +85,19 @@ function name_data($name) {
     $slices[] = $male;
   }
 
-  $result_json["slices"] = $slices;
+  $result_array["slices"] = $slices;
 
-  return $result_json;
+  return $result_array;
 }
 
 function name_sex_data($name, $sex) {
   $query = file_get_contents("../queries/observations_for_name_sex.rq");
   $query = str_replace("{{name}}", $name, $query);
   $query = str_replace("{{sex}}", $sex, $query);
-  $result = sparql_query($query);
+  $result = run_query($query);
   
   $slices = Array();
-  $result_json = Array(
+  $result_array = Array(
     "@id" => "http://$_SERVER[HTTP_HOST]". APP_PATH . "name/$name/$sex/",
     "name" => $name,
     "sex" => $sex,
@@ -120,9 +133,9 @@ function name_sex_data($name, $sex) {
     $slices[] = $year;
   }
 
-  $result_json["slices"] = $slices;
+  $result_array["slices"] = $slices;
 
-  return $result_json;
+  return $result_array;
 }
 
 function select_name($name) {
