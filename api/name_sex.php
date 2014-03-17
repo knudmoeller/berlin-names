@@ -72,7 +72,7 @@
     var data = <?php echo json_encode($data); ?>;
 
     var color = d3.scale.quantize()
-      .range(["#ffffe5","#f7fcb9","#d9f0a3","#addd8e","#78c679","#41ab5d","#238443","#006837","#004529"]);
+      .range(["#fffff4", "#ffffe5","#f7fcb9","#d9f0a3","#addd8e","#78c679","#41ab5d","#238443","#006837","#004529", "#003307"]);
     color.domain([1, <?php echo MAX_COUNT; ?>]);
     var svg = {};    
     var map = {};
