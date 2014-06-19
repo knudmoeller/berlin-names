@@ -88,6 +88,7 @@ d3.json("<?php echo APP_PATH; ?>data/names.json", function(error, all_names) {
         }
         $("#sex_select option")
           .each(function() { this.selected = (this.value === sex); });
+        document.forms["formId"].submit();
     });
 
   });
